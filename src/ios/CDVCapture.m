@@ -41,7 +41,7 @@
 @implementation CDVImagePicker
 
 @synthesize quality;
-@synthesize hide_switch;
+@synthesize hideSwitch;
 @synthesize callbackId;
 @synthesize mimeType;
 
@@ -249,7 +249,7 @@ bool hideFlipButtonInSubviews(UIView *view) {
     // taking more than one video (limit) is only supported if provide own controls via cameraOverlayView property
     NSNumber* duration = [options objectForKey:@"duration"];
     NSNumber* camera_device = [options objectForKey:@"camera_device"];
-    NSInteger hideSwitch = [options objectForKey:@"hideSwitch"];
+    NSInteger hideSwitch = [[options objectForKey:@"hideSwitch" integerValue];
     NSString* mediaType = nil;
 
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -277,7 +277,7 @@ bool hideFlipButtonInSubviews(UIView *view) {
     } else {
         pickerController.delegate = self;
         pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        pickerController.hideSwitch = hide_switch
+        pickerController.hideSwitch = hideSwitch
         pickerController.allowsEditing = NO;
 
         if (camera_device == 1) {
