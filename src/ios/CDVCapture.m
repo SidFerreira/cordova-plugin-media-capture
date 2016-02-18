@@ -248,6 +248,7 @@ bool hideFlipButtonInSubviews(UIView *view) {
     // options could contain limit, duration and mode
     // taking more than one video (limit) is only supported if provide own controls via cameraOverlayView property
     NSNumber* duration = [options objectForKey:@"duration"];
+    NSInteger quality = [[options objectForKey:@"quality"] integerValue];
     NSInteger cameraDevice = [[options objectForKey:@"cameraDevice"] integerValue];
     NSInteger hideSwitch = [[options objectForKey:@"hideSwitch"] integerValue];
     NSString* mediaType = nil;
@@ -281,9 +282,19 @@ bool hideFlipButtonInSubviews(UIView *view) {
         pickerController.allowsEditing = NO;
 
         if (cameraDevice == 1) {
+
             if( [UIImagePickerController isCameraDeviceAvailable: UIImagePickerControllerCameraDeviceFront ]) {
+
                 pickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+
             }
+
+        }
+
+        if (quality == 0) {
+
+            pickerController.videoQuality = UIImagePickerControllerQualityTypeLow;
+
         }
 
         // iOS 3.0
