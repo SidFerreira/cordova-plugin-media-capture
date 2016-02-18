@@ -277,7 +277,7 @@ bool hideFlipButtonInSubviews(UIView *view) {
     } else {
         pickerController.delegate = self;
         pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        pickerController.hideSwitch = hideSwitch
+        pickerController.hideSwitch = hideSwitch;
         pickerController.allowsEditing = NO;
 
         if (cameraDevice == 1) {
