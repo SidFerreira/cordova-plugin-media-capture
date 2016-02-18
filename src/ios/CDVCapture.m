@@ -41,6 +41,7 @@
 @implementation CDVImagePicker
 
 @synthesize quality;
+@synthesize hide_switch;
 @synthesize callbackId;
 @synthesize mimeType;
 
@@ -70,6 +71,31 @@
     }
     
     [super viewWillAppear:animated];
+}
+
+bool hideFlipButtonInSubviews(UIView *view) {
+    if ([[[view class] description] isEqualToString:@"CMKFlipButton"]) {
+        [view setHidden:YES];
+        return true;
+    } else {
+        for (UIView *subview in [view subviews]) {
+            if (hideFlipButtonInSubviews(subview)) {
+                break;
+            };
+        }
+        return false;
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    if (hide_switch == 1) {
+
+        hideFlipButtonInSubviews(self.view);
+
+    }
+
 }
 
 @end
@@ -222,6 +248,8 @@
     // options could contain limit, duration and mode
     // taking more than one video (limit) is only supported if provide own controls via cameraOverlayView property
     NSNumber* duration = [options objectForKey:@"duration"];
+    NSNumber* camera_device = [options objectForKey:@"camera_device"];
+    NSNumber* hide_switch = [options objectForKey:@"hide_switch"];
     NSString* mediaType = nil;
 
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -250,6 +278,13 @@
         pickerController.delegate = self;
         pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
         pickerController.allowsEditing = NO;
+
+        if (camera_device == 1) {
+            if( [UIImagePickerController isCameraDeviceAvailable: UIImagePickerControllerCameraDeviceFront ]) {
+                pickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+            }
+        }
+
         // iOS 3.0
         pickerController.mediaTypes = [NSArray arrayWithObjects:mediaType, nil];
 

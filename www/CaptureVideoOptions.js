@@ -29,6 +29,10 @@ var CaptureVideoOptions = function(){
     this.duration = 0;
     // Video quality parameter, 0 means low quality, suitable for MMS messages, and value 1 means high quality.
     this.quality = 1;
+    // Camera to use. 0 to back, 1 to front
+    this.camera_device = 0;
+    // Hide switch camera;
+    this.hide_switch = 0;
 };
 
 module.exports = CaptureVideoOptions;
