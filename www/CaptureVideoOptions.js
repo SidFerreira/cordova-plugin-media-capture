@@ -32,7 +32,7 @@ var CaptureVideoOptions = function(){
     // Camera to use. 0 to back, 1 to front
     this.camera_device = 0;
     // Hide switch camera;
-    this.hide_switch = 0;
+    this.hideSwitch = 0;
 };
 
 module.exports = CaptureVideoOptions;

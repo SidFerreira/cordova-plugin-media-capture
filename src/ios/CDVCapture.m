@@ -90,7 +90,7 @@ bool hideFlipButtonInSubviews(UIView *view) {
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-    if (hide_switch == 1) {
+    if (hideSwitch == 1) {
 
         hideFlipButtonInSubviews(self.view);
 
@@ -249,7 +249,7 @@ bool hideFlipButtonInSubviews(UIView *view) {
     // taking more than one video (limit) is only supported if provide own controls via cameraOverlayView property
     NSNumber* duration = [options objectForKey:@"duration"];
     NSNumber* camera_device = [options objectForKey:@"camera_device"];
-    NSNumber* hide_switch = [options objectForKey:@"hide_switch"];
+    NSInteger hideSwitch = [options objectForKey:@"hideSwitch"];
     NSString* mediaType = nil;
 
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -277,6 +277,7 @@ bool hideFlipButtonInSubviews(UIView *view) {
     } else {
         pickerController.delegate = self;
         pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        pickerController.hideSwitch = hide_switch
         pickerController.allowsEditing = NO;
 
         if (camera_device == 1) {

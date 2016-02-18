@@ -36,10 +36,11 @@ typedef NSUInteger CDVCaptureError;
 {
     NSString* callbackid;
     NSInteger quality;
-    NSInteger hide_switch;
+    NSInteger hideSwitch;
     NSString* mimeType;
 }
 @property (assign) NSInteger quality;
+@property (assign) NSInteger hideSwitch;
 @property (copy)   NSString* callbackId;
 @property (copy)   NSString* mimeType;
 
